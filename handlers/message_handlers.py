@@ -44,6 +44,7 @@ async def add_product(message: types.Message):
     if '/add ' in message.text:
         if '\n' in message.text:
             products = message.text.replace('/add', '').replace(',', '\n').split('\n')
+            products = [product for product in products if product != '']
             bag = []  # для вывода нескольких добавленных в список продуктов в сообщении
             for product in products:
                 if product.strip().capitalize() in list_of_products:
@@ -56,6 +57,7 @@ async def add_product(message: types.Message):
                 await message.answer(f"{', '.join(bag)} added to the list")
         elif ',' in message.text:
             products = message.text.replace('/add', '').split(',')
+            products = [product for product in products if product != '']
             bag = []  # для вывода нескольких добавленных в список продуктов в сообщении
             for product in products:
                 if product.strip().capitalize() in list_of_products:
@@ -133,6 +135,7 @@ async def additional_product(message: types.Message, state: FSMContext):
 
         if '\n' in message.text:
             products = message.text.replace('/add', '').replace(',', '\n').split('\n')
+            products = [product for product in products if product != '']
             bag = []  # для вывода нескольких добавленных в список продуктов в сообщении
             for product in products:
                 if product.strip().capitalize() in list_of_products:
@@ -145,6 +148,7 @@ async def additional_product(message: types.Message, state: FSMContext):
                 await message.answer(f"{', '.join(bag)} added to the list")
         elif ',' in message.text:
             products = message.text.replace('/add', '').split(',')
+            products = [product for product in products if product != '']
             bag = []  # для вывода нескольких добавленных в список продуктов в сообщении
             for product in products:
                 if product.strip().capitalize() in list_of_products:
